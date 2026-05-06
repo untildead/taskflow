@@ -1,6 +1,6 @@
 <div align="center">
 
-# ✅ TaskFlow
+# TaskFlow
 
 **Una app de tareas full-stack con auth, drag & drop, dark mode y filtros en tiempo real.**
 
@@ -18,25 +18,25 @@
 
 ---
 
-## 🎯 Sobre el proyecto
+## Sobre el proyecto
 
 TaskFlow es una aplicación de gestión de tareas pensada como portafolio: cada decisión técnica intenta mostrar criterio sobre Server Components, autenticación, validación, accesibilidad y UX. No es una to-do list cualquiera.
 
-## ✨ Features
+## Features
 
-- 🔐 **Autenticación** — Google OAuth + email/contraseña (NextAuth v5 con Prisma adapter, sesiones JWT, contraseñas hasheadas con bcrypt).
-- 📋 **CRUD completo** de tareas y categorías, todo vía Server Actions con validación Zod en el servidor.
-- 🏷️ **Categorías con colores** — palette picker, conteo de tareas, escope por usuario.
-- 🚦 **Prioridades visuales** — alta / media / baja con indicadores cromáticos.
-- 📅 **Fechas límite inteligentes** — badges distintos para vencidas, hoy, mañana y próximos días.
-- 🔎 **Filtros + búsqueda** persistentes en la URL (status, prioridad, categoría, búsqueda con debounce).
-- 🎯 **Drag & drop** para reordenar (dnd-kit) con actualización optimista y rollback en error.
-- 🌓 **Dark / Light mode** que respeta `prefers-color-scheme` (next-themes).
-- ✨ **Animaciones** sutiles con Framer Motion y CSS keyframes.
-- 📱 **Responsive** mobile-first.
-- 🔔 **Feedback inmediato** con toasts (sonner) y skeleton loaders.
+- **Autenticación** — Google OAuth + email/contraseña (NextAuth v5 con Prisma adapter, sesiones JWT, contraseñas hasheadas con bcrypt).
+- **CRUD completo** de tareas y categorías, todo vía Server Actions con validación Zod en el servidor.
+- **Categorías con colores** — palette picker, conteo de tareas, escope por usuario.
+- **Prioridades visuales** — alta / media / baja con indicadores cromáticos.
+- **Fechas límite inteligentes** — badges distintos para vencidas, hoy, mañana y próximos días.
+- **Filtros + búsqueda** persistentes en la URL (status, prioridad, categoría, búsqueda con debounce).
+- **Drag & drop** para reordenar (dnd-kit) con actualización optimista y rollback en error.
+- **Dark / Light mode** que respeta `prefers-color-scheme` (next-themes).
+- **Animaciones** sutiles con Framer Motion y CSS keyframes.
+- **Responsive** mobile-first.
+- **Feedback inmediato** con toasts (sonner) y skeleton loaders.
 
-## 🛠️ Stack
+## Stack
 
 | Capa | Tecnología |
 | --- | --- |
@@ -51,7 +51,7 @@ TaskFlow es una aplicación de gestión de tareas pensada como portafolio: cada 
 | Drag & drop | @dnd-kit/core + sortable |
 | Despliegue | Vercel |
 
-## 🚀 Instalación local
+## Instalación local
 
 ### Prerequisitos
 
@@ -98,7 +98,7 @@ Todas viven en `.env.local` (que está gitignored). Mira `.env.example` para la 
 | `AUTH_GOOGLE_SECRET` | Client secret de Google OAuth |
 | `AUTH_URL` | URL pública de la app (ej. `http://localhost:3000`) |
 
-## 📜 Scripts disponibles
+## Scripts disponibles
 
 ```bash
 npm run dev          # servidor de desarrollo
@@ -111,7 +111,7 @@ npm run db:seed      # poblar la base con datos demo
 npm run db:studio    # abrir Prisma Studio
 ```
 
-## 🏗️ Arquitectura
+## Arquitectura
 
 ### Server-first
 
@@ -135,7 +135,7 @@ Filtros y búsqueda viven en `searchParams`. Esto te permite compartir un link "
 - **Prisma 6 (no 7)** — Prisma 7 es muy nuevo, dropeó `url` en `schema.prisma` y rompe el adaptador de Auth.js. Volveré cuando todo esté listo.
 - **Sin React Query / SWR** — Server Actions + `revalidatePath` cubren las mutaciones, y el dashboard es un Server Component que recarga al revalidar. No hay datos del cliente que justifiquen una capa extra.
 
-## 📁 Estructura
+## Estructura
 
 ```
 taskflow/
@@ -167,7 +167,7 @@ taskflow/
 └── README.md
 ```
 
-## 🚢 Deploy
+## Deploy
 
 1. Sube el repo a GitHub.
 2. Crea un proyecto Postgres en [Neon](https://neon.tech) y copia la `DATABASE_URL`.
@@ -178,12 +178,6 @@ taskflow/
 
 El script `build` corre `prisma generate` automáticamente, así que no necesitas configurar nada extra en Vercel.
 
-## 📄 Licencia
+## Licencia
 
 [MIT](LICENSE)
-
----
-
-<div align="center">
-Hecho con ❤️ y bastante <code>npx prisma generate</code>
-</div>
