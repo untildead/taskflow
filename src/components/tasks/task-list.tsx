@@ -34,14 +34,17 @@ type Props = {
 };
 
 export function TaskList({ initialTasks, categories, filtersApplied }: Props) {
+  // Sync local state with server data when initialTasks changes (after revalidatePath)
+  // Pattern: derive state from props during render (React 19 recommended).
   const [tasks, setTasks] = React.useState(initialTasks);
+  const [lastInitial, setLastInitial] = React.useState(initialTasks);
+  if (initialTasks !== lastInitial) {
+    setLastInitial(initialTasks);
+    setTasks(initialTasks);
+  }
+
   const [open, setOpen] = React.useState(false);
   const [editing, setEditing] = React.useState<TaskWithCategory | null>(null);
-
-  // Keep local state in sync when server data changes (after revalidatePath)
-  React.useEffect(() => {
-    setTasks(initialTasks);
-  }, [initialTasks]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),

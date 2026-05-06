@@ -5,11 +5,13 @@ import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const subscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 export function ThemeToggle() {
   const { setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => setMounted(true), []);
+  const mounted = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const isDark = mounted && resolvedTheme === "dark";
 
