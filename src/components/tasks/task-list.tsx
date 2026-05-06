@@ -16,6 +16,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -110,9 +111,20 @@ export function TaskList({ initialTasks, categories, filtersApplied }: Props) {
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={tasks.map((t) => t.id)} strategy={verticalListSortingStrategy}>
             <div className="space-y-2">
-              {tasks.map((task) => (
-                <TaskCard key={task.id} task={task} onEdit={openEdit} />
-              ))}
+              <AnimatePresence initial={false}>
+                {tasks.map((task) => (
+                  <motion.div
+                    key={task.id}
+                    layout
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.97 }}
+                    transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <TaskCard task={task} onEdit={openEdit} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           </SortableContext>
         </DndContext>

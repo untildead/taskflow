@@ -47,7 +47,7 @@ export function Dialog({
         role="dialog"
         aria-modal="true"
         className={cn(
-          "relative bg-[var(--card)] border border-[var(--border)] rounded-xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto",
+          "relative bg-[var(--card)] border border-[var(--border)] rounded-xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto animate-in scale-in",
           className,
         )}
         onClick={(e) => e.stopPropagation()}
