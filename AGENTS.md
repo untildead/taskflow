@@ -6,7 +6,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # TaskFlow — agent notes
 
-Full-stack to-do app. Production target: Vercel + Neon.
+Full-stack to-do app. Production target: Render + Neon.
 
 ## Stack gotchas
 

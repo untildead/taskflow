@@ -10,6 +10,7 @@
 [![Prisma](https://img.shields.io/badge/Prisma-6-2D3748?logo=prisma&logoColor=white)](https://www.prisma.io)
 [![Auth.js](https://img.shields.io/badge/Auth.js-v5-000?logo=auth0&logoColor=white)](https://authjs.dev)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-336791?logo=postgresql&logoColor=white)](https://neon.tech)
+[![Render](https://img.shields.io/badge/Render-Deploy-46E3B7?logo=render&logoColor=white)](https://render.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 [Demo en vivo](#) · [Reportar bug](https://github.com/untildead/taskflow/issues) · [Pedir feature](https://github.com/untildead/taskflow/issues)
@@ -49,7 +50,7 @@ TaskFlow es una aplicación de gestión de tareas pensada como portafolio: cada 
 | Validación | Zod 4 |
 | UI | Componentes propios (cva + Tailwind), lucide-react, Framer Motion, sonner |
 | Drag & drop | @dnd-kit/core + sortable |
-| Despliegue | Vercel |
+| Despliegue | Render (Web Service) |
 
 ## Instalación local
 
@@ -169,14 +170,20 @@ taskflow/
 
 ## Deploy
 
+El repo incluye un `render.yaml` (Render Blueprint) listo para usar.
+
 1. Sube el repo a GitHub.
 2. Crea un proyecto Postgres en [Neon](https://neon.tech) y copia la `DATABASE_URL`.
-3. Importa el repo en [Vercel](https://vercel.com/new).
-4. Añade las variables de entorno en _Settings → Environment Variables_.
-5. Actualiza el redirect URI en Google OAuth con tu dominio de Vercel.
-6. ¡Deploy!
+3. En [Render](https://render.com/), elige **New → Blueprint** y selecciona este repo. Render detecta `render.yaml` automáticamente.
+4. Completa las variables marcadas como `sync: false` en el dashboard:
+   - `DATABASE_URL` — la cadena de Neon.
+   - `AUTH_SECRET` — genera uno con `npx auth secret`.
+   - `AUTH_URL` — la URL pública (ej. `https://taskflow.onrender.com`).
+   - `AUTH_GOOGLE_ID` y `AUTH_GOOGLE_SECRET` — opcionales.
+5. (Si usas Google OAuth) añade `https://TU_DOMINIO.onrender.com/api/auth/callback/google` como _Authorized redirect URI_ en Google Cloud Console.
+6. Render construye y arranca con `npm install && npm run build` + `npm start`. El primer deploy tarda ~3-5 min.
 
-El script `build` corre `prisma generate` automáticamente, así que no necesitas configurar nada extra en Vercel.
+> **Free tier de Render**: el servicio se duerme tras 15 min de inactividad y tarda ~30 s en despertar.
 
 ## Licencia
 

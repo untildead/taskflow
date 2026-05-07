@@ -1,0 +1,34 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Deploy con un click: importa este repo en Render y aceptará el blueprint.
+# Las variables marcadas como `sync: false` se configuran manualmente en el dashboard.
+
+services:
+  - type: web
+    name: taskflow
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NODE_ENV
+        value: production
+      # Connection string de PostgreSQL (Neon)
+      - key: DATABASE_URL
+        sync: false
+      # Secreto para firmar JWT — generar con `npx auth secret`
+      - key: AUTH_SECRET
+        sync: false
+      # URL pública de la app (https://taskflow.onrender.com)
+      - key: AUTH_URL
+        sync: false
+      # Google OAuth (opcional, dejar vacío si no se usa)
+      - key: AUTH_GOOGLE_ID
+        sync: false
+      - key: AUTH_GOOGLE_SECRET
+        sync: false
