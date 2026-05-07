@@ -1,14 +1,13 @@
-import { Header } from "@/components/layout/header";
+// src/app/dashboard/layout.tsx
+import { ReactNode } from "react";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">{children}</main>
-    </div>
-  );
+export default async function DashboardLayout({ children }: { children: ReactNode }) {
+  const session = await auth();
+  if (!session) {
+    redirect("/login");
+  }
+
+  return <>{children}</>;
 }
