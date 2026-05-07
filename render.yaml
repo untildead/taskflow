@@ -9,15 +9,15 @@ services:
     plan: free
     region: oregon
     branch: main
-    buildCommand: npm install && npm run build
+    # `--include=dev` fuerza la instalación de devDependencies (tailwind,
+    # typescript, etc.) que Render omite por defecto al usar NODE_ENV=production.
+    buildCommand: npm install --include=dev && npm run build
     startCommand: npm start
     healthCheckPath: /
     autoDeploy: true
     envVars:
       - key: NODE_VERSION
         value: "20"
-      - key: NODE_ENV
-        value: production
       # Connection string de PostgreSQL (Neon)
       - key: DATABASE_URL
         sync: false
