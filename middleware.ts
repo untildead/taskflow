@@ -1,24 +1,8 @@
 import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
-export default auth((req) => {
-  const { pathname } = req.nextUrl;
-  const isAuthed = !!req.auth;
-
-  const publicRoutes = ["/", "/login", "/register"];
-  const isPublic = publicRoutes.includes(pathname);
-
-  if (!isAuthed && !isPublic) {
-    return NextResponse.redirect(new URL("/login", req.nextUrl));
-  }
-
-  if (isAuthed && (pathname === "/login" || pathname === "/register")) {
-    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
-  }
-
-  return NextResponse.next();
-});
+export { auth as default } from "@/lib/auth";
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\.svg|.*\\.png).*)"],
+  matcher: ["/dashboard/:path*", "/api/actions/:path*"],
 };
